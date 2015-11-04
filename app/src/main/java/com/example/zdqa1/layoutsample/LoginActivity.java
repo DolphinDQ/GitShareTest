@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,7 +42,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
-    public   static  final String LOGINED_MESSAGE ="foo@example.com:LOGIN";
+    public static final String LOGINED_MESSAGE = "foo@example.com:LOGIN";
     /**
      * Id to identity READ_CONTACTS permission request.
      */
@@ -68,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ExceptionHandler.register(this);
+
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -151,7 +152,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (mAuthTask != null) {
             return;
         }
-
+        try{
+            throw new Exception("123");
+        }catch (Exception ex){
+//            Log.w(this.getLocalClassName(),ex.getMessage());
+            Log.d(LoginActivity.this.getLocalClassName(),"ssss",ex);
+        }
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -338,9 +344,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
 //                finish();
-                Intent intent = new Intent(LoginActivity.this, ViewTextActivity.class);
-                intent.putExtra(LOGINED_MESSAGE,mEmail);
-                startActivity(intent);
+
+
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
