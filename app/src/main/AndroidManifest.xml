@@ -23,6 +23,58 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".MyService2"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+        <service
+            android:name=".MyIntentService"
+            android:exported="false" >
+        </service>
+
+        <activity
+            android:name=".ListTestActivity"
+            android:label="@string/title_activity_list_test"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.zdqa1.layoutsample.LoginActivity" />
+        </activity>
+        <activity android:name=".EmptyActivity" >
+
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.car.application"
+            android:resource="@xml/automotive_app_desc" />
+        <!--
+ Main music service, provides media browsing and media playback services to
+         consumers through MediaBrowserService and MediaSession. Consumers connect to it through
+         MediaBrowser (for browsing) and MediaController (for playback control)
+        -->
+        <service
+            android:name=".MyMusicService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+        <service android:name=".MyMessagingService" >
+        </service>
+
+        <receiver android:name=".MessageReadReceiver" >
+            <intent-filter>
+                <action android:name="com.example.zdqa1.layoutsample.ACTION_MESSAGE_READ" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".MessageReplyReceiver" >
+            <intent-filter>
+                <action android:name="com.example.zdqa1.layoutsample.ACTION_MESSAGE_REPLY" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
